@@ -49,7 +49,7 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 
 1. Clona el repositorio:
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
+   git clone https://github.com/Joabulla07/TP-Backend-LoL-Coach.git
    cd TP-LOL-COACHING
    ```
 
