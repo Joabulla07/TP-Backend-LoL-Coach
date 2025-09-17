@@ -1,14 +1,14 @@
 import express from 'express'
 import bodyParser from "body-parser";
-import {userRoute} from "./routers/userRouter.js";
-import {connectDB} from "./core/db.js";
+import {userRoute} from "./src/routers/userRouter.js";
+import {connectDB} from "./src/core/db.js";
 import session from 'express-session'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-import logger from './core/logger.js';
-import {loginRoute} from "./routers/loginRouter.js";
-import {emailRoute} from "./routers/emailRouter.js";
+import logger from './src/core/logger.js';
+import {loginRoute} from "./src/routers/loginRouter.js";
+import {emailRoute} from "./src/routers/emailRouter.js";
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -36,8 +36,8 @@ app.use(cors({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware para archivos estáticos (CSS, JS, imágenes)
-app.use(express.static('public'));
+// // Middleware para archivos estáticos (CSS, JS, imágenes)
+app.use(express.static('templates'));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
