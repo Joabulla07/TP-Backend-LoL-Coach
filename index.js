@@ -9,6 +9,7 @@ import cors from 'cors';
 import logger from './src/core/logger.js';
 import {loginRoute} from "./src/routers/loginRouter.js";
 import {emailRoute} from "./src/routers/emailRouter.js";
+import {chatRoute} from "./src/routers/chatRouter.js";
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -54,6 +55,7 @@ app.use(
 app.use("/api/user", userRoute)
 app.use("/api", loginRoute)
 app.use('/api/email', emailRoute);
+app.use('/api/chat', chatRoute)
 
 // Middleware para manejo de errores
 app.use((err, req, res, next) => {

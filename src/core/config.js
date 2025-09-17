@@ -6,5 +6,6 @@ export const config = {
     dbName: process.env.DB_NAME,
     dbCollection: process.env.DB_COLLECTION,
     brevoApiKey: process.env.BREVO_API_KEY,
-    apiUrl: process.env.FRONTEND_URL
+    apiUrl: process.env.FRONTEND_URL,
+    chatUrl: process.env.API_URL_COACH
 };
