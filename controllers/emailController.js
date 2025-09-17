@@ -1,17 +1,16 @@
 import {
     forgetPasswordEmailService,
-    notificationContactFormEmailService,
-    sendToMeService
+    notificationReportEmailService,
+    sendToMeReportService
 } from "../services/emailService.js";
 import logger from "../core/logger.js";
 
 
-export const sendToMe = async (req, res) => {
+export const sendToMeReport = async (req, res) => {
     try {
         logger.info("llamando a sendtome")
-        const userData = req.body;
-        const result = await sendToMeService(userData)
-        const result2 = await notificationContactFormEmailService(userData)
+        const result = await sendToMeReportService(req.body)
+        const result2 = await notificationReportEmailService(req.body)
 
 
         return  res.status(200).json({result: result, result2: result2});

@@ -11,28 +11,6 @@ apiKey.apiKey = config.brevoApiKey;
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-export const sendToMeService = async (userData) => {
-    const { name, email, telefono, consultas, message } = userData
-
-    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-
-    sendSmtpEmail.sender = {
-        name: 'GestionAR',
-        email: 'joannabbado4748@gmail.com'
-    };
-
-    sendSmtpEmail.to = [{
-        email: 'joannabbado4748@gmail.com',
-        name: 'GestionAR'
-    }];
-
-    sendSmtpEmail.subject = "Formulario de Contacto";
-    sendSmtpEmail.textContent = `Usuario Email: ${email}\n\nNombre: ${name}\n\nTelefono: ${telefono}\n\nConsultas: ${consultas}\n\nMensaje: ${message}`;
-
-    const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
-
-    return {message: 'Correo enviado correctamente', content: data}
-}
 
 export const forgetPasswordEmailService = async(email) => {
     console.log(email)
@@ -51,7 +29,7 @@ export const forgetPasswordEmailService = async(email) => {
     });
 
     sendSmtpEmail.sender = {
-        name: 'GestionAR',
+        name: 'League of coaching',
         email: 'joannabbado4748@gmail.com'
     };
 
@@ -71,29 +49,58 @@ export const forgetPasswordEmailService = async(email) => {
     }
 }
 
+export const sendToMeReportService = async (userData) => {
+    const { from_email, description_content, subject} = userData
 
-export const notificationContactFormEmailService = async (userData) => {
-    const { name, email} = userData
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
-    const template = await loadEmailTemplate('NOTIFICATION_CONTACT_FORM', {
-        user_email: name });
-
     sendSmtpEmail.sender = {
-        name: 'GestionAR',
+        name: 'League of Coaching',
         email: 'joannabbado4748@gmail.com'
     };
 
     sendSmtpEmail.to = [{
-        email: email
+        email: 'joannabbado4748@gmail.com',
+        name: 'League of Coaching'
     }];
 
-    sendSmtpEmail.subject = "Recibimos tu consulta";
+    sendSmtpEmail.subject = `Reporte de usuario: ${subject}`;
+    sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
+
+    try {
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        throw new Error('Error al enviar el correo');
+    }
+}
+
+
+export const notificationReportEmailService = async (userData) => {
+    const { from_email, description_content, subject} = userData
+
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+    const template = await loadEmailTemplate('NOTIFICATION_REPORT', {
+        user_email: from_email });
+
+    sendSmtpEmail.sender = {
+        name: 'League of Coaching',
+        email: 'joannabbado4748@gmail.com'
+    };
+
+    sendSmtpEmail.to = [{
+        name: from_email,// You might want to use a name if available
+        email: from_email
+    }];
+
+    sendSmtpEmail.subject = "Recibimos tu reporte";
     sendSmtpEmail.htmlContent = template;
 
     try {
-        await apiInstance.sendTransacEmail(sendSmtpEmail);
-        return { success: true, message: 'Correo enviado' };
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
     } catch (error) {
         console.error('Error al enviar el correo:', error);
         throw new Error('Error al enviar el correo');
@@ -108,7 +115,7 @@ export const notificationChangePasswordEmailService = async (email) => {
         user_email: email });
 
     sendSmtpEmail.sender = {
-        name: 'GestionAR',
+        name: 'League of coaching',
         email: 'joannabbado4748@gmail.com'
     };
 
@@ -120,8 +127,8 @@ export const notificationChangePasswordEmailService = async (email) => {
     sendSmtpEmail.htmlContent = template;
 
     try {
-        await apiInstance.sendTransacEmail(sendSmtpEmail);
-        return { success: true, message: 'Correo enviado' };
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
     } catch (error) {
         console.error('Error al enviar el correo:', error);
         throw new Error('Error al enviar el correo');
@@ -135,7 +142,7 @@ export const createUserNotificationEmail = async(email) => {
         user_email: email });
 
     sendSmtpEmail.sender = {
-        name: 'GestionAR',
+        name: 'League of Coaching',
         email: 'joannabbado4748@gmail.com'
     };
 
@@ -143,12 +150,12 @@ export const createUserNotificationEmail = async(email) => {
         email: email
     }];
 
-    sendSmtpEmail.subject = "Bienvenido a GestionAr";
+    sendSmtpEmail.subject = "Bienvenido a League of Coaching";
     sendSmtpEmail.htmlContent = template;
 
     try {
-        await apiInstance.sendTransacEmail(sendSmtpEmail);
-        return { success: true, message: 'Correo enviado' };
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
     } catch (error) {
         console.error('Error al enviar el correo:', error);
         throw new Error('Error al enviar el correo');

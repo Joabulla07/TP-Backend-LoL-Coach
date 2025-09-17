@@ -2,13 +2,13 @@ import express from 'express'
 import bodyParser from "body-parser";
 import {userRoute} from "./routers/userRouter.js";
 import {connectDB} from "./core/db.js";
-import {loginRoute} from "./routers/loginRouter.js";
-import {emailRoute} from "./routers/emailRouter.js";
 import session from 'express-session'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import logger from './core/logger.js';
+import {loginRoute} from "./routers/loginRouter.js";
+import {emailRoute} from "./routers/emailRouter.js";
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // Add CORS configuration
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://gestionarreactapptp2.netlify.app', 'http://localhost:3000'],
+    origin: ['http://localhost:5173', 'http://localhost:3000'], //agregar el deploy del front
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -44,6 +44,11 @@ const userSchema = new mongoose.Schema({
             message:
                 "Password must be bewteen 6 and 12 characters, with at least one number, one uppercase letter and one lowercase letter"
         }
+    },
+
+    message_history: {
+        type: Array,
+        required: false
     }
 }, {
     timestamps: true} )
@@ -54,4 +59,4 @@ userSchema.pre("save", function (next) {
     next()
 })
 
-export default mongoose.model("user", userSchema)
+export default mongoose.model("lol-coach-users-utn", userSchema)
