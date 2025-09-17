@@ -23,23 +23,23 @@ export const createUserService = async (userData) => {
     return { message: "Usuario creado", content: user}
 }
 
-// export const getUserByIdService = async(userData) => {
-//     const { userId } = userData
-//     console.log(userId)
-//     const user = await User.findById(userId)
-//
-//     if(!user){
-//         throw new Error("Usuario no encontrado")
-//     }
-//
-//     return {
-//         userId: user._id,
-//         name: user.name,
-//         lastname: user.lastName,
-//         email: user.email
-//     }
-// }
-//
+export const getUserByIdService = async(userData) => {
+    const { userId } = userData
+    console.log(userId)
+    const user = await User.findById(userId)
+
+    if(!user){
+        throw new Error("Usuario no encontrado")
+    }
+
+    return {
+        userId: user._id,
+        name: user.name,
+        lastname: user.lastName,
+        email: user.email
+    }
+}
+
 export const resetPasswordService = async(userId, userData) => {
     const user = await User.findById(userId)
 

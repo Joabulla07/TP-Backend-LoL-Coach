@@ -1,6 +1,6 @@
 import User from "../models/userModel.js"
 import {
-    createUserService,
+    createUserService, getUserByIdService,
     resetPasswordService
 } from "../services/userService.js";
 import logger from "../core/logger.js";
@@ -19,20 +19,20 @@ export const createUser = async (req, res) => {
     }
 }
 
-// export const getUserById = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const user = await getUserByIdService({ userId: id });
-//
-//         return res.status(200).json(user);
-//     } catch(error) {
-//         if(error.message === "Usuario no encontrado") {
-//             return res.status(404).json({ message: "Usuario no encontrado" });
-//         }
-//         return res.status(500).json({ message: "Error del servidor" });
-//     }
-// }
-//
+export const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await getUserByIdService({ userId: id });
+
+        return res.status(200).json(user);
+    } catch(error) {
+        if(error.message === "Usuario no encontrado") {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+        return res.status(500).json({ message: "Error del servidor" });
+    }
+}
+
 // este metodo renderiza el form cuando apretas el link enviado
 export const resetPasswordForm = async(req, res) =>{
     const { id } = req.params;
