@@ -77,13 +77,21 @@ export const sendToMeReportService = async (userData) => {
 }
 
 
-export const notificationReportEmailService = async (userData) => {
-    const { from_email, description_content, subject} = userData
+export const notificationReportEmailService = async (userData, reqType) => {
+    const { name, email, message} = userData
+    let template = null
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
-    const template = await loadEmailTemplate('NOTIFICATION_REPORT', {
-        user_email: from_email });
+    if(reqType === "reporte"){
+        template = await loadEmailTemplate('NOTIFICATION_REPORT', {
+            user_email: email });
+    }
+    else {
+        template = await loadEmailTemplate('NOTIFICATION_CONSULTA', {
+            user_email: email });
+    }
+
 
     sendSmtpEmail.sender = {
         name: 'League of Coaching',
@@ -91,11 +99,11 @@ export const notificationReportEmailService = async (userData) => {
     };
 
     sendSmtpEmail.to = [{
-        name: from_email,// You might want to use a name if available
-        email: from_email
+        name: email,// You might want to use a name if available
+        email: email
     }];
 
-    sendSmtpEmail.subject = "Recibimos tu reporte";
+    sendSmtpEmail.subject = `Recibimos tu ${reqType}`;
     sendSmtpEmail.htmlContent = template;
 
     try {
@@ -152,6 +160,33 @@ export const createUserNotificationEmail = async(email) => {
 
     sendSmtpEmail.subject = "Bienvenido a League of Coaching";
     sendSmtpEmail.htmlContent = template;
+
+    try {
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        throw new Error('Error al enviar el correo');
+    }
+}
+
+export const sendFormService = async (userData) => {
+    const { name, email, message} = userData
+
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+    sendSmtpEmail.sender = {
+        name: 'League of Coaching',
+        email: 'joannabbado4748@gmail.com'
+    };
+
+    sendSmtpEmail.to = [{
+        email: 'joannabbado4748@gmail.com',
+        name: 'League of Coaching'
+    }];
+
+    sendSmtpEmail.subject = `Formulario de consulta`;
+    sendSmtpEmail.textContent = `Usuario Email: ${email}\n\nConsultas: ${message}`;
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
