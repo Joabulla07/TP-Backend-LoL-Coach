@@ -61,3 +61,19 @@ export const resetPassword = async(req, res) => {
         return res.status(500).json({ error: error.message });
     }
 }
+
+export const changePassword = async(req, res) => {
+    try{
+        const { id }  = req.params
+        const { new_password } = req.body
+        logger.info('Cambiando la contraseña del usuario');
+
+        const result = await resetPasswordService(id, new_password)
+        const result2 = await notificationChangePasswordEmailService(result.email)
+
+        return res.status(200).json(result);
+    } catch(error){
+        logger.error('Error en resetPassword:', error);
+        return res.status(500).json({ error: error.message });
+    }
+}
