@@ -8,7 +8,6 @@ import logger from "../core/logger.js";
 
 export const sendToMeReport = async (req, res) => {
     try {
-        logger.info("llamando a sendtome")
         const result = await sendToMeReportService(req.body)
         const result2 = await notificationReportEmailService(req.body, "reporte")
 

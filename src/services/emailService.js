@@ -78,18 +78,18 @@ export const sendToMeReportService = async (userData) => {
 
 
 export const notificationReportEmailService = async (userData, reqType) => {
-    const { name, email, message} = userData
+    const { from_email, description_content, subject} = userData
     let template = null
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     if(reqType === "reporte"){
         template = await loadEmailTemplate('NOTIFICATION_REPORT', {
-            user_email: email });
+            user_email: from_email });
     }
     else {
         template = await loadEmailTemplate('NOTIFICATION_CONSULTA', {
-            user_email: email });
+            user_email: from_email });
     }
 
 
@@ -99,8 +99,8 @@ export const notificationReportEmailService = async (userData, reqType) => {
     };
 
     sendSmtpEmail.to = [{
-        name: email,// You might want to use a name if available
-        email: email
+        name: from_email,// You might want to use a name if available
+        email: from_email
     }];
 
     sendSmtpEmail.subject = `Recibimos tu ${reqType}`;
