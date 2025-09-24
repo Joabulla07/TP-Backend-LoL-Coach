@@ -5,7 +5,6 @@ export const verifyTokenMiddleware = (req, res, next) => {
         // Leer el token de la sesion del backend
 
         const authHeader = req.headers.authorization;
-        console.log(authHeader)
 
         // Si no hay token o el token no empieza con bearer, falla
         if(!authHeader || !authHeader.startsWith("Bearer ")){
@@ -19,12 +18,7 @@ export const verifyTokenMiddleware = (req, res, next) => {
         // El mismo sistema que lo firmó es quien puede verificar si es valido o no el token
         const decoded = verifyToken(token)
 
-        console.log({decoded})
-
-        // Guardamos en el request del usuario el token
         req.user = decoded
-
-        // Si salio todo bien pasamos al controlador, al proximo paso
 
         next()
 
