@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 // Add CORS configuration
 app.use(cors({
-    origin: [*], //agregar el deploy del front
+    origin: ['*'], //agregar el deploy del front
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
