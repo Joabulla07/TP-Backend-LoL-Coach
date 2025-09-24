@@ -171,7 +171,7 @@ export const createUserNotificationEmail = async(email) => {
 }
 
 export const sendFormService = async (userData) => {
-    const { name, email, message} = userData
+    const { from_email, description_content, subject} = userData
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
@@ -186,7 +186,7 @@ export const sendFormService = async (userData) => {
     }];
 
     sendSmtpEmail.subject = `Formulario de consulta`;
-    sendSmtpEmail.textContent = `Usuario Email: ${email}\n\nConsultas: ${message}`;
+    sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
