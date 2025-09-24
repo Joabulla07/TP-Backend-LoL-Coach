@@ -28,11 +28,12 @@ app.use((req, res, next) => {
     next();
 });
 
-// Add CORS configuration
+// Configuración de CORS para permitir cualquier origen
 app.use(cors({
-    origin: ['*'], //agregar el deploy del front
+    origin: '*', // Permite cualquier origen
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Si necesitas soportar credenciales
 }));
 
 app.set('view engine', 'ejs');
