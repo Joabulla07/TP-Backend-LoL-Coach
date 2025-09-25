@@ -2,7 +2,6 @@ import SibApiV3Sdk from 'sib-api-v3-sdk';
 import { config } from "../core/config.js";
 import User from "../models/userModel.js";
 import {loadEmailTemplate} from "../utils/emailHelper.js";
-import logger from "../core/logger.js";
 
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -29,8 +28,8 @@ export const forgetPasswordEmailService = async(email) => {
     });
 
     sendSmtpEmail.sender = {
-        name: 'League of coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
@@ -55,13 +54,13 @@ export const sendToMeReportService = async (userData) => {
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.sender = {
-        name: 'League of Coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
-        email: 'joannabbado4748@gmail.com',
-        name: 'League of Coaching'
+        email: config.correoRemitente,
+        name: config.nombreRemitente
     }];
 
     sendSmtpEmail.subject = `Reporte de usuario: ${subject}`;
@@ -94,8 +93,8 @@ export const notificationReportEmailService = async (userData, reqType) => {
 
 
     sendSmtpEmail.sender = {
-        name: 'League of Coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
@@ -123,8 +122,8 @@ export const notificationChangePasswordEmailService = async (email) => {
         user_email: email });
 
     sendSmtpEmail.sender = {
-        name: 'League of coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
@@ -150,8 +149,8 @@ export const createUserNotificationEmail = async(email) => {
         user_email: email });
 
     sendSmtpEmail.sender = {
-        name: 'League of Coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
@@ -176,13 +175,13 @@ export const sendFormService = async (userData) => {
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.sender = {
-        name: 'League of Coaching',
-        email: 'joannabbado4748@gmail.com'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     };
 
     sendSmtpEmail.to = [{
-        email: 'joannabbado4748@gmail.com',
-        name: 'League of Coaching'
+        name: config.nombreRemitente,
+        email: config.correoRemitente
     }];
 
     sendSmtpEmail.subject = `Formulario de consulta`;

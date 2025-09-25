@@ -7,5 +7,7 @@ export const config = {
     dbCollection: process.env.DB_COLLECTION,
     brevoApiKey: process.env.BREVO_API_KEY,
     apiUrl: process.env.FRONTEND_URL,
-    chatUrl: process.env.API_URL_COACH
+    chatUrl: process.env.API_URL_COACH,
+    correoRemitente: process.env.CORREO_REMITENTE,
+    nombreRemitente: process.env.NOMBRE_REMITENTE,
 };
