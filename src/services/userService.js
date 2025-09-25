@@ -58,3 +58,8 @@ export const resetPasswordService = async(userId, userData) => {
         email: userEmail
     };
 }
+
+export const deleteUserService = async(id) => {
+    await User.findByIdAndDelete(id)
+    return {message: 'Usuario eliminado'}
+}

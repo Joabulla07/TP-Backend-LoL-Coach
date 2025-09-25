@@ -1,6 +1,6 @@
 import User from "../models/userModel.js"
 import {
-    createUserService, getUserByIdService,
+    createUserService, deleteUserService, getUserByIdService,
     resetPasswordService
 } from "../services/userService.js";
 import logger from "../core/logger.js";
@@ -75,5 +75,15 @@ export const changePassword = async(req, res) => {
     } catch(error){
         logger.error('Error en resetPassword:', error);
         return res.status(500).json({ error: error.message });
+    }
+}
+
+export const deleteUser = async(req, res) =>{
+    try {
+        const { id } = req.params;
+        const response = await deleteUserService(id);
+        return res.status(200).json(response);
+    } catch(error) {
+        return res.status(500).json({ message: `Error del servidor: ${error}` });
     }
 }

@@ -4,7 +4,8 @@ import {
     createUser,
     getUserById,
     resetPassword,
-    resetPasswordForm
+    resetPasswordForm,
+    deleteUser
 } from "../controllers/userController.js";
 import {verifyTokenMiddleware} from "../middleware/verifyTokenMiddleware.js";
 
@@ -15,3 +16,4 @@ userRoute.get("/getUser/:id", verifyTokenMiddleware, getUserById)
 userRoute.post("/resetPassword/:id", resetPassword)
 userRoute.get("/resetPasswordForm/:id", resetPasswordForm)
 userRoute.put("/changePassword/:id", verifyTokenMiddleware,changePassword)
+userRoute.delete("/delete/:id", verifyTokenMiddleware, deleteUser)
