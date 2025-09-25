@@ -37,7 +37,7 @@ app.use(cors({
 }));
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 
 // // Middleware para archivos estáticos (CSS, JS, imágenes)
 app.use(express.static('templates'));
