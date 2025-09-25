@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-import {chatService} from "../services/chatService.js";
+import {chatService, resetChatService} from "../services/chatService.js";
 
 
 export const chat = async (req, res) => {
@@ -8,6 +8,16 @@ export const chat = async (req, res) => {
         const result = await chatService(userMessage)
         return res.status(201).json(result)
 
+    } catch (error) {
+        console.log(error.message)
+        return res.status(500).json({ message: "Internal server error", error: error.message })
+    }
+}
+
+export const resetChat = async (req, res) => {
+    try {
+        const result = await resetChatService()
+        return res.status(200).json(result)
     } catch (error) {
         console.log(error.message)
         return res.status(500).json({ message: "Internal server error", error: error.message })
