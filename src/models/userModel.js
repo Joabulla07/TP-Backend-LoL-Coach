@@ -46,6 +46,11 @@ const userSchema = new mongoose.Schema({
         }
     },
 
+    lastLogin: {
+        type: Date,
+        required: false
+    },
+
     message_history: {
         type: Array,
         required: false

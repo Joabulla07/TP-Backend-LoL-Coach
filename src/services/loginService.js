@@ -33,6 +33,8 @@ export const loginService = async (userData) => {
         userId: userFound._id,
         userEmail: userFound.email
     }
+    userFound.lastLogin = new Date()
+    await userFound.save()
 
     const token = jwt.sign(payload, "secret", { expiresIn: "1h" })
 
