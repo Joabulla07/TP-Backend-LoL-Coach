@@ -11,6 +11,7 @@ import {loginRoute} from "./src/routers/loginRouter.js";
 import {emailRoute} from "./src/routers/emailRouter.js";
 import {chatRoute} from "./src/routers/chatRouter.js";
 import {startRouter} from "./src/routers/startServerRouter.js";
+import cookieParser from 'cookie-parser'; // Importamos cookie-parser
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -30,11 +31,15 @@ app.use((req, res, next) => {
 
 // Configuración de CORS para permitir cualquier origen
 app.use(cors({
-    origin: '*', // Permite cualquier origen
+    origin: 'http://localhost:5173',  // si no tira error de cors, hay que definir de a uno por las cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true // Si necesitas soportar credenciales
 }));
+
+// Usamos el middleware cookie-parser
+app.use(cookieParser());
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));

@@ -59,9 +59,23 @@ const userSchema = new mongoose.Schema({
     timestamps: true} )
 
 userSchema.pre("save", function (next) {
+    // Si la contraseña no ha sido modificada, no hacer nada
+    if (!this.isModified("password")) {
+        return next();
+    }
     // Encriptamos la password antes de guardarla
-    this.password = bcrypt.hashSync(this.password, 10)
-    next()
-})
+    this.password = bcrypt.hashSync(this.password, 10);
+    next();
+});
+
+// Hook para encriptar la contraseña antes de una actualización
+userSchema.pre("findOneAndUpdate", function (next) {
+    const update = this.getUpdate();
+    if (update.password) {
+        // Si la contraseña está en el objeto de actualización, la encriptamos
+        update.password = bcrypt.hashSync(update.password, 10);
+    }
+    next();
+});
 
 export default mongoose.model("lol-coach-users-utn", userSchema)

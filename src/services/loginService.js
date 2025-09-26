@@ -15,7 +15,6 @@ export const loginService = async (userData) => {
 
     const userFound = await User.findOne({email})
 
-
     if(!userFound){
         const error = new Error("User or password is incorrect")
         error.statusCode = 400
@@ -33,10 +32,15 @@ export const loginService = async (userData) => {
         userId: userFound._id,
         userEmail: userFound.email
     }
-    userFound.lastLogin = new Date()
-    await userFound.save()
 
     const token = jwt.sign(payload, "secret", { expiresIn: "1h" })
 
-    return {message: "Logged in", token}
+    const userResponse = {
+        id: userFound._id,
+        userEmail: userFound.email,
+        name: userFound.name,
+        lastName: userFound.lastName,
+    };
+
+    return {message: "Logged in", token, user: userResponse}
 }
