@@ -30,7 +30,9 @@ export const loginService = async (userData) => {
 
     const payload = {
         userId: userFound._id,
-        userEmail: userFound.email
+        userEmail: userFound.email,
+        name: userFound.name,
+        lastName: userFound.lastName,
     }
 
     const token = jwt.sign(payload, "secret", { expiresIn: "1h" })

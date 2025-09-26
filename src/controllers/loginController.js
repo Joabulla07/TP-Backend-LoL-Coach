@@ -35,7 +35,9 @@ export const checkAuthStatus = async (req, res) => {
             isAuthenticated: true,
             user: {
                 id: user.userId,
-                email: user.userEmail
+                email: user.userEmail,
+                name: user.name,
+                lastName: user.lastName,
             }
         });
     } catch (err) {
