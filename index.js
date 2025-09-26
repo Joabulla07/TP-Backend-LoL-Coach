@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 // Configuración de CORS para permitir cualquier origen
 app.use(cors({
-    origin: 'http://localhost:5173',  // si no tira error de cors, hay que definir de a uno por las cookies
+    origin: ['http://localhost:5173', 'http://league-of-coaching.netlify.app/'],  // si no tira error de cors, hay que definir de a uno por las cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true // Si necesitas soportar credenciales
