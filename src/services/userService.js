@@ -1,8 +1,6 @@
 import User from "../models/userModel.js";
-import bcrypt from "bcryptjs";
 import logger from "../core/logger.js";
 import {createUserNotificationEmail} from "./emailService.js";
-// import {createUserNotificationEmail} from "./emailService.js";
 
 
 export const createUserService = async (userData) => {

@@ -104,30 +104,72 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 
 ### Autenticación
 - `POST /api/login` - Iniciar sesión
-  - Body: `{ "email": "usuario@ejemplo.com", "password": "contraseña" }`
-
+  - Body:
+    ```json
+    {
+      "email": "usuario@ejemplo.com",
+      "password": "contraseña"
+    }
+    ```
+- `GET /api/auth/status` - Verifica el estado de la autenticación (requiere cookie)
+- `POST /api/logout` - Cierra la sesión del usuario (requiere cookie)
 
 ### Usuarios
 - `POST /api/user/create` - Crear nuevo usuario
-  - Body: 
+  - Body:
     ```json
     {
       "email": "usuario@ejemplo.com",
       "password": "Contraseña123",
       "name": "Nombre",
-      "lastname": "Apellido"
+      "lastName": "Apellido"
     }
     ```
-- `GET /api/user/getUser/:id` - Traer un usuario por Id
-    - Query param:
-      - id
-      
-- `POST /api/user/resetPassword/:id` - Restablecer contraseña
-  - Body: `{ "newPassword": "NuevaContraseña123" }`
+- `GET /api/user/getUser/:id` - Traer un usuario por Id (requiere cookie)
+    - Path param: `id` (ID del usuario)
+- `PUT /api/user/changePassword/:id` - Cambiar la contraseña de un usuario (requiere cookie)
+    - Path param: `id` (ID del usuario)
+    - Body:
+      ```json
+      {
+        "newPassword": "NuevaContraseña456"
+      }
+      ```
+- `DELETE /api/user/delete/:id` - Eliminar un usuario (requiere cookie)
+    - Path param: `id` (ID del usuario)
+
+### Restablecimiento de Contraseña
+- `POST /api/email/forgetPassword` - Solicitar restablecimiento de contraseña por email
+  - Body:
+    ```json
+    {
+      "email": "usuario@ejemplo.com"
+    }
+    ```
+- `GET /api/user/resetPasswordForm/:id` - Muestra el formulario para restablecer la contraseña (usado por el link del email).
+    - Path param: `id` (ID del usuario)
+- `POST /api/user/resetPassword/:id` - Establece la nueva contraseña desde el formulario.
+  - Path param: `id` (ID del usuario)
+  - Body:
+    ```json
+    {
+      "newPassword": "NuevaContraseña123"
+    }
+    ```
+
+### Chat
+- `POST /api/chat/chat` - Enviar un mensaje al asistente de IA (requiere cookie)
+  - Body:
+    ```json
+    {
+      "message": "¿Cuál es la mejor build para Jinx?"
+    }
+    ```
+- `POST /api/chat/reset` - Reinicia el historial de chat del usuario (requiere cookie).
 
 ### Emails
-- `POST /api/email/send-to-me` - Enviar reporte
-  - Body: 
+- `POST /api/email/sendForm` - Enviar un formulario de contacto
+  - Body:
     ```json
     {
       "from_email": "remitente@ejemplo.com",
@@ -135,8 +177,15 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
       "description_content": "Contenido del mensaje"
     }
     ```
-- `POST /api/email/forgetPassword` - Solicitar restablecimiento de contraseña
-  - Body: `{ "email": "usuario@ejemplo.com" }`
+- `POST /api/email/send-to-me` - Enviar reporte (requiere cookie)
+  - Body:
+    ```json
+    {
+      "from_email": "remitente@ejemplo.com",
+      "subject": "Asunto del mensaje",
+      "description_content": "Contenido del mensaje"
+    }
+    ```
 
 ## 🔒 Variables de Entorno
 
@@ -159,7 +208,7 @@ Las contribuciones son bienvenidas. Por favor, lee las [pautas de contribución]
 
 ## 📧 Contacto
 
-Para consultas o soporte, por favor contacta a [joannabbado4748@gmail.com](mailto:joannabbado4748@gmail.com)
+Para consultas o soporte, por favor contacta a [leagueofcoaching.jbsolutions@gmail.com](mailto:leagueofcoaching.jbsolutions@gmail.com)
 
 ---
 
