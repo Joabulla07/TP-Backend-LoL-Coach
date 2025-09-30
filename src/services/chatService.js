@@ -22,7 +22,7 @@ export const chatService = async (userMessage) =>{
             },
         })
         const data = await res.json();
-        logger.info(data)
+        logger.info(data.response)
         return data
 
     } catch (error) {
