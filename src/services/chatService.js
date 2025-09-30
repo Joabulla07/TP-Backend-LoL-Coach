@@ -4,13 +4,15 @@ import logger from "../core/logger.js";
 const apiUrl = config.chatUrl;
 
 export const chatService = async (userMessage) =>{
-    const { message } = userMessage
+    const { message, conversationId, userId } = userMessage
     logger.info(`message: ${message}`)
     try {
         const res = await fetch(`${apiUrl}/api/chat`, {
             method: "POST",
             body: JSON.stringify({
                 message: message,
+                conversationId: conversationId,
+                userId: userId
             }),
             headers: {
                 Accept: "application/json",

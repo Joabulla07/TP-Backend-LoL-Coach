@@ -29,27 +29,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// 1. Define your allowed origins in an array
-// const allowedOrigins = ['http://localhost:5173', 'https://league-of-coaching.netlify.app'];
-//
-// // 2. Create the CORS options with a function for the origin
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         // Check if the incoming origin is in our allowlist
-//         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//             // If it is, allow it.
-//             callback(null, true);
-//         } else {
-//             // Otherwise, block it.
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     credentials: true
-// };
-
-
 
 // Configuración de CORS para permitir cualquier origen
 app.use(cors({
