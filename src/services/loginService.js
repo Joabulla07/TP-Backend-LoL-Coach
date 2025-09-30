@@ -29,8 +29,8 @@ export const loginService = async (userData) => {
     }
 
     const payload = {
-        userId: userFound._id,
-        userEmail: userFound.email,
+        id: userFound._id,
+        email: userFound.email,
         name: userFound.name,
         lastName: userFound.lastName,
     }
@@ -39,7 +39,7 @@ export const loginService = async (userData) => {
 
     const userResponse = {
         id: userFound._id,
-        userEmail: userFound.email,
+        email: userFound.email,
         name: userFound.name,
         lastName: userFound.lastName,
     };

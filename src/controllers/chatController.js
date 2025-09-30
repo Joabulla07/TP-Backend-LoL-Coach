@@ -6,7 +6,7 @@ import logger from "../core/logger.js";
 export const chat = async (req, res) => {
     try {
         const userMessage = req.body
-        logger.info(`userMessage: ${userMessage}`)
+        // logger.info(`userMessage: ${userMessage}`)
         const result = await chatService(userMessage)
         return res.status(201).json(result)
 

@@ -1,5 +1,4 @@
 import {loginService} from "../services/loginService.js";
-import logger from "../core/logger.js";
 
 
 
@@ -34,8 +33,8 @@ export const checkAuthStatus = async (req, res) => {
         return res.status(200).json({
             isAuthenticated: true,
             user: {
-                id: user.userId,
-                email: user.userEmail,
+                id: user.id,
+                email: user.email,
                 name: user.name,
                 lastName: user.lastName,
             }
