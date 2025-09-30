@@ -6,6 +6,8 @@ const apiUrl = config.chatUrl;
 export const chatService = async (userMessage) =>{
     const { message, conversationId, userId } = userMessage
     logger.info(`message: ${message}`)
+    logger.info(`conversationId: ${conversationId}`)
+    logger.info(`userId: ${userId}`)
     try {
         const res = await fetch(`${apiUrl}/api/chat`, {
             method: "POST",
