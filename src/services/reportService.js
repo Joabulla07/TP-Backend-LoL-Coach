@@ -1,4 +1,5 @@
 import Report from "../models/reportModel.js";
+import logger from "../core/logger.js";
 
 
 export const getAllReportsService = async () => {
@@ -7,10 +8,11 @@ export const getAllReportsService = async () => {
 }
 
 export const createReportService = async (from_email, description_content, subject, user_id) => {
+    logger.info("creando nuevo reporte")
     const report = new Report({
-        report_description: description_content,
-        user_email: from_email,
-        user_id: user_id,
+        reportDescription: description_content,
+        userEmail: from_email,
+        userId: user_id,
         subject: subject
     });
 

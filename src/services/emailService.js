@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import {loadEmailTemplate} from "../utils/emailHelper.js";
 import Report from "../models/reportModel.js";
 import {createReportService} from "./reportService.js";
+import logger from "../core/logger.js";
 
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -51,6 +52,7 @@ export const forgetPasswordEmailService = async(email) => {
 }
 
 export const sendToMeReportService = async (userData) => {
+    logger.info(userData)
     const { from_email, description_content, subject, user_id} = userData
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
