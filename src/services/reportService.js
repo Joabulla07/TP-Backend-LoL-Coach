@@ -2,7 +2,7 @@ import Report from "../models/reportModel.js";
 
 
 export const getAllReportsService = async () => {
-    const reports = await Report.find({}).populate('user_id'); // El segundo parámetro en populate es opcional, sirve para seleccionar qué campos del usuario quieres traer.
+    const reports = await Report.find({}).populate('user_id');
     return reports;
 }
 
