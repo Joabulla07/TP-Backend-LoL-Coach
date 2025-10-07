@@ -2,6 +2,8 @@ import SibApiV3Sdk from 'sib-api-v3-sdk';
 import { config } from "../core/config.js";
 import User from "../models/userModel.js";
 import {loadEmailTemplate} from "../utils/emailHelper.js";
+import Report from "../models/reportModel.js";
+import {createReportService} from "./reportService.js";
 
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -49,7 +51,7 @@ export const forgetPasswordEmailService = async(email) => {
 }
 
 export const sendToMeReportService = async (userData) => {
-    const { from_email, description_content, subject} = userData
+    const { from_email, description_content, subject, user_id} = userData
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
@@ -65,6 +67,8 @@ export const sendToMeReportService = async (userData) => {
 
     sendSmtpEmail.subject = `Reporte de usuario: ${subject}`;
     sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
+
+    await createReportService(from_email, description_content, subject, user_id)
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);

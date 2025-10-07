@@ -11,7 +11,8 @@ import {loginRoute} from "./src/routers/loginRouter.js";
 import {emailRoute} from "./src/routers/emailRouter.js";
 import {chatRoute} from "./src/routers/chatRouter.js";
 import {startRouter} from "./src/routers/startServerRouter.js";
-import cookieParser from 'cookie-parser'; // Importamos cookie-parser
+import cookieParser from 'cookie-parser';
+import {reportRoute} from "./src/routers/reportRouter.js"; // Importamos cookie-parser
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -65,6 +66,7 @@ app.use("/api", loginRoute)
 app.use('/api/email', emailRoute);
 app.use('/api/chat', chatRoute)
 app.use('/api/start', startRouter)
+app.use('api/report', reportRoute)
 
 // Middleware para manejo de errores
 app.use((err, req, res, next) => {
