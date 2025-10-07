@@ -3,7 +3,7 @@ import logger from "../core/logger.js";
 
 
 export const getAllReportsService = async () => {
-    const reports = await Report.find({}).populate('user_id');
+    const reports = await Report.find({}).populate('userId');
     return reports;
 }
 
