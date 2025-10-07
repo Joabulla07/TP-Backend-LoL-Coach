@@ -66,7 +66,7 @@ app.use("/api", loginRoute)
 app.use('/api/email', emailRoute);
 app.use('/api/chat', chatRoute)
 app.use('/api/start', startRouter)
-app.use('api/report', reportRoute)
+app.use('/api/report', reportRoute)
 
 // Middleware para manejo de errores
 app.use((err, req, res, next) => {
