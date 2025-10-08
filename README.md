@@ -162,7 +162,9 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
   - Body:
     ```json
     {
-      "message": "¿Cuál es la mejor build para Jinx?"
+      "message": "¿Cuál es la mejor build para Jinx?",
+     "conversationId": "conversationId",
+     "userId": "userId"
     }
     ```
 - `POST /api/chat/reset` - Reinicia el historial de chat del usuario (requiere cookie).

@@ -21,6 +21,12 @@ export const chatService = async (userMessage) =>{
                 "Content-Type": "application/json",
             },
         })
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`Error from chat API: ${res.status} ${res.statusText} - ${errorText}`);
+        }
+
         const data = await res.json();
         logger.info(data.response)
         return data
@@ -40,6 +46,12 @@ export const resetChatService = async () => {
                 "Content-Type": "application/json",
             },
         })
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`Error from chat API: ${res.status} ${res.statusText} - ${errorText}`);
+        }
+
         const data = await res.json();
         logger.info(data)
         return data
