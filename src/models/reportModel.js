@@ -24,7 +24,7 @@ const reportSchema = new mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'lol-coach-users-utn',
         required: true
     },
     resolution: {
