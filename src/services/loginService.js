@@ -24,6 +24,7 @@ export const loginService = async (userData) => {
     if(!bcrypt.compareSync(password, userFound.password)){
         const error = new Error("User or password is incorrect")
         error.statusCode = 401
+        error.message = "User or password is incorrect"
         logger.info("error de contraseña")
         throw error
     }

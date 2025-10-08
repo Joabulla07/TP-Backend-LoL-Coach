@@ -52,11 +52,8 @@ export const forgetPasswordEmailService = async(email) => {
 }
 
 export const sendToMeReportService = async (userData) => {
-    const { from_email, description_content, subject, user_id} = userData
-    logger.info(`from email: ${from_email}`)
-    logger.info(`description content: ${description_content}`)
-    logger.info(`subject: ${subject}`)
-    logger.info(`user id: ${user_id}`)
+    const { reportId } = userData
+    logger.info(`reportId: ${reportId}`)
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.sender = {
@@ -69,18 +66,11 @@ export const sendToMeReportService = async (userData) => {
         name: config.nombreRemitente
     }];
 
-    sendSmtpEmail.subject = `Reporte de usuario: ${subject}`;
-    sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
+    const reporte = await Report.findById(reportId).populate('userId', 'email')
+    logger.info(`Datos de reporte: ${reporte.userId.email}, reporte subject: ${reporte.subject}, reporte description: ${reporte.reportDescription}`)
+    sendSmtpEmail.subject = `Reporte de usuario: ${reporte.subject}`;
+    sendSmtpEmail.textContent = `Usuario Email: ${reporte.userId.email}\n\nConsultas: ${reporte.reportDescription}`;
 
-    logger.info("creando reporte")
-
-    const payload = {
-        description_content: description_content,
-        subject: subject,
-        user_id: user_id
-    }
-
-    await createReportService(payload)
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
@@ -93,18 +83,22 @@ export const sendToMeReportService = async (userData) => {
 
 
 export const notificationReportEmailService = async (userData, reqType) => {
-    const { from_email, description_content, subject} = userData
+    const { reportId } = userData
+    logger.info(`reportId: ${reportId}`)
     let template = null
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
+    const reporte = await Report.findById(reportId).populate('userId', 'email')
+    logger.info(`Datos de reporte: ${reporte.userId.email}, ${reporte.userId.name}`)
+
     if(reqType === "reporte"){
         template = await loadEmailTemplate('NOTIFICATION_REPORT', {
-            user_email: from_email });
+            user_email: reporte.userId.email });
     }
     else {
         template = await loadEmailTemplate('NOTIFICATION_CONSULTA', {
-            user_email: from_email });
+            user_email: reporte.userId.email });
     }
 
 
@@ -114,8 +108,8 @@ export const notificationReportEmailService = async (userData, reqType) => {
     };
 
     sendSmtpEmail.to = [{
-        name: from_email,// You might want to use a name if available
-        email: from_email
+        name: reporte.userId.name,// You might want to use a name if available
+        email: reporte.userId.email
     }];
 
     sendSmtpEmail.subject = `Recibimos tu ${reqType}`;

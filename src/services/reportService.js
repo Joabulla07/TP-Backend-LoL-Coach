@@ -18,6 +18,6 @@ export const createReportService = async (body) => {
         resolution: null
     });
 
-    await report.save();
-    return {message: "Reporte creado exitosamente"}
+    const reporte = await report.save();
+    return {message: "Reporte creado exitosamente", content: reporte._id}
 }
