@@ -78,4 +78,4 @@ userSchema.pre("findOneAndUpdate", function (next) {
     next();
 });
 
-export default mongoose.model("lol-coach-users-utn", userSchema)
+export default mongoose.model("lol-coach-users-utn", userSchema, "lol-coach-users-utn")
