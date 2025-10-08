@@ -186,17 +186,30 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
       "description_content": "Contenido del mensaje"
     }
     ```
+### Reportes
+- `POST /api/report/create` - Enviar un formulario de contacto
+    - Body:
+      ```json
+      {
+        "reportDescription": "descripcion del reporte",
+        "userEmail": "email del usuario que reporta",
+        "userId": "user id",
+        "subject": "asunto del reporte"
+      }
+      ```
+- `GET /api/report` - Traer todos los reportes (requiere cookie)
 
 ## 🔒 Variables de Entorno
 
-| Variable | Descripción | Ejemplo |
-|----------|-------------|---------|
-| PORT | Puerto del servidor | 3000 |
-| NODE_ENV | Entorno de ejecución | development/production |
-| MONGO_DB_CONNECTION_STRING | URL de conexión a MongoDB | mongodb://localhost:27017/lol-coaching |
-| BREVO_API_KEY | API Key de Sendinblue (Brevo) | xkeysib-... |
-| SESSION_SECRET | Secreto para las sesiones | secreto-seguro |
-| FRONTEND_URL | URL del frontend | http://localhost:3001 |
+| Variable | Descripción                   | Ejemplo                              |
+|----------|-------------------------------|--------------------------------------|
+| NODE_ENV | Entorno de ejecución          | development/production               |
+| MONGO_DB_CONNECTION_STRING | URL de conexión a MongoDB     | mongodb://localhost:27017/lol-coaching |
+| BREVO_API_KEY | API Key de Sendinblue (Brevo) | xkeysib-...                          |
+| FRONTEND_URL | URL del frontend              | http://localhost:3001                |
+| API_URL_COACH | URL del chat del coach        | http://localhost                     |
+| CORREO_REMITENTE | correo remitente              | example@mail.com                     |
+| NOMBRE_REMITENTE | URL del frontend              | LEAGUE OF COACHING                   |
 
 ## 📝 Licencia
 
