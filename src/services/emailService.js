@@ -73,7 +73,14 @@ export const sendToMeReportService = async (userData) => {
     sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
 
     logger.info("creando reporte")
-    await createReportService(from_email, description_content, subject, user_id)
+
+    const payload = {
+        description_content: description_content,
+        subject: subject,
+        user_id: user_id
+    }
+
+    await createReportService(payload)
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);

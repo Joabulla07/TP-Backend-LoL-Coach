@@ -10,14 +10,6 @@ const reportSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
     },
-    userEmail: {
-        type: String,
-        required: true,
-        maxlength: 30,
-        minlength: 6,
-        trim: true,
-        lowercase: true,
-    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'lol-coach-users-utn',
