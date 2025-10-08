@@ -138,7 +138,7 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 - `DELETE /api/user/delete/:id` - Eliminar un usuario (requiere cookie)
     - Path param: `id` (ID del usuario)
 
-### Restablecimiento de Contraseña
+### Restablecimiento de Contraseña con ejs y emails (Desde postman probablemente no funcione ya que renderiza ejs)
 - `POST /api/email/forgetPassword` - Solicitar restablecimiento de contraseña por email
   - Body:
     ```json
@@ -148,7 +148,7 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
     ```
 - `GET /api/user/resetPasswordForm/:id` - Muestra el formulario para restablecer la contraseña (usado por el link del email).
     - Path param: `id` (ID del usuario)
-- `POST /api/user/resetPassword/:id` - Establece la nueva contraseña desde el formulario.
+- `POST /api/user/resetPassword/:id` - Establece la nueva contraseña desde el formulario. Como es un ejs no permite PATCH
   - Path param: `id` (ID del usuario)
   - Body:
     ```json
@@ -162,7 +162,7 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
   - Body:
     ```json
     {
-      "message": "¿Cuál es la mejor build para Jinx?",
+     "message": "¿Cuál es la mejor build para Jinx?",
      "conversationId": "conversationId",
      "userId": "userId"
     }
@@ -170,6 +170,16 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 - `POST /api/chat/reset` - Reinicia el historial de chat del usuario (requiere cookie).
 
 ### Emails
+
+agregar forget password send
+- `POST /api/email/forgetPassword` - Enviar un formulario de contacto
+    - Body:
+      ```json
+      {
+        "email": "email"
+      }
+      ```
+
 - `POST /api/email/sendForm` - Enviar un formulario de contacto
   - Body:
     ```json
@@ -183,22 +193,19 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
   - Body:
     ```json
     {
-      "from_email": "remitente@ejemplo.com",
-      "subject": "Asunto del mensaje",
-      "description_content": "Contenido del mensaje"
+      "reportId": "id de reporte"
     }
     ```
 ### Reportes
-- `POST /api/report/create` - Enviar un formulario de contacto
-    - Body:
-      ```json
-      {
-        "reportDescription": "descripcion del reporte",
-        "userEmail": "email del usuario que reporta",
-        "userId": "user id",
-        "subject": "asunto del reporte"
-      }
-      ```
+  - `POST /api/report/create` - Enviar un formulario de contacto
+      - Body:
+        ```json
+        {
+          "description_content": "content jajajaja",
+          "subject": "subject",
+          "user_id": "68e5b9e3e14f2ecc21ca6cdb"
+        }
+        ```
 - `GET /api/report` - Traer todos los reportes (requiere cookie)
 
 ## 🔒 Variables de Entorno

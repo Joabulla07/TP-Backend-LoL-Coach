@@ -50,11 +50,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: false
     },
-
-    message_history: {
-        type: Array,
-        required: false
-    }
 }, {
     timestamps: true} )
 
