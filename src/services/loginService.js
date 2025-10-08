@@ -16,15 +16,16 @@ export const loginService = async (userData) => {
     const userFound = await User.findOne({email})
 
     if(!userFound){
-        const error = new Error("User or password is incorrect")
+        const error = new Error("User is incorrect")
         error.statusCode = 400
+        error.message = "User is incorrect"
         throw error
     }
 
     if(!bcrypt.compareSync(password, userFound.password)){
-        const error = new Error("User or password is incorrect")
+        const error = new Error("Password is incorrect")
         error.statusCode = 401
-        error.message = "User or password is incorrect"
+        error.message = "Password is incorrect"
         logger.info("error de contraseña")
         throw error
     }
