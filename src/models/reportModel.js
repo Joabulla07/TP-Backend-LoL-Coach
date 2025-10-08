@@ -17,11 +17,10 @@ const reportSchema = new mongoose.Schema({
         minlength: 6,
         trim: true,
         lowercase: true,
-        match: /^\S+@\S+\.\S+$/,
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'lol-coach-users-utn',
+        ref: 'lol-coach-users-utns',
         required: true
     },
     resolution: {
