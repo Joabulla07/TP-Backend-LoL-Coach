@@ -82,7 +82,7 @@ export const sendToMeReportService = async (userData) => {
 }
 
 
-export const notificationReportEmailService = async (userData, reqType) => {
+export const notificationReportEmailService = async (userData) => {
     const { reportId } = userData
     logger.info(`reportId: ${reportId}`)
     let template = null
@@ -92,14 +92,9 @@ export const notificationReportEmailService = async (userData, reqType) => {
     const reporte = await Report.findById(reportId).populate('userId', 'email name')
     logger.info(`Datos de reporte: ${reporte.userId.email}, ${reporte.userId.name}`)
 
-    if(reqType === "reporte"){
-        template = await loadEmailTemplate('NOTIFICATION_REPORT', {
-            user_email: reporte.userId.email });
-    }
-    else {
-        template = await loadEmailTemplate('NOTIFICATION_CONSULTA', {
-            user_email: reporte.userId.email });
-    }
+    template = await loadEmailTemplate('NOTIFICATION_REPORT', {
+        user_email: reporte.userId.email });
+
 
 
     sendSmtpEmail.sender = {
@@ -112,7 +107,7 @@ export const notificationReportEmailService = async (userData, reqType) => {
         email: reporte.userId.email
     }];
 
-    sendSmtpEmail.subject = `Recibimos tu ${reqType}`;
+    sendSmtpEmail.subject = `Recibimos tu reporte`;
     sendSmtpEmail.htmlContent = template;
 
     try {
@@ -196,6 +191,40 @@ export const sendFormService = async (userData) => {
 
     sendSmtpEmail.subject = `Formulario de consulta`;
     sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
+
+    try {
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        return {message: 'Correo enviado correctamente', content: data};
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        throw new Error('Error al enviar el correo');
+    }
+}
+
+
+export const notificationFormEmailService = async (userData) => {
+    const { from_email, description_content, subject} = userData
+
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+
+    const template = await loadEmailTemplate('NOTIFICATION_CONSULTA', {
+        user_email: from_email });
+
+
+
+    sendSmtpEmail.sender = {
+        name: config.nombreRemitente,
+        email: config.correoRemitente
+    };
+
+    sendSmtpEmail.to = [{
+        name: from_email,// You might want to use a name if available
+        email: from_email
+    }];
+
+    sendSmtpEmail.subject = `Recibimos tu consulta`;
+    sendSmtpEmail.htmlContent = template;
 
     try {
         const data = await apiInstance.sendTransacEmail(sendSmtpEmail);

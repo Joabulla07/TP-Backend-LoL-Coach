@@ -1,5 +1,5 @@
 import {
-    forgetPasswordEmailService,
+    forgetPasswordEmailService, notificationFormEmailService,
     notificationReportEmailService, sendFormService,
     sendToMeReportService
 } from "../services/emailService.js";
@@ -9,7 +9,7 @@ import logger from "../core/logger.js";
 export const sendToMeReport = async (req, res) => {
     try {
         const result = await sendToMeReportService(req.body)
-        const result2 = await notificationReportEmailService(req.body, "reporte")
+        const result2 = await notificationReportEmailService(req.body)
 
 
         return  res.status(200).json({result: result, result2: result2});
@@ -25,7 +25,7 @@ export const sendToMeReport = async (req, res) => {
 export const sendForm = async (req, res) => {
     try {
         const result = await sendFormService(req.body)
-        const result2 = await notificationReportEmailService(req.body, "consulta")
+        const result2 = await notificationFormEmailService(req.body)
 
 
         return  res.status(200).json({result: result, result2: result2});
