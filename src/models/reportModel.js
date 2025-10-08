@@ -19,7 +19,6 @@ const reportSchema = new mongoose.Schema({
         minlength: 6,
         trim: true,
         lowercase: true,
-        unique: true,
         match: /^\S+@\S+\.\S+$/,
     },
     userId: {
