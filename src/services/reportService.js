@@ -14,7 +14,8 @@ export const createReportService = async (body) => {
     const report = new Report({
         reportDescription: description_content,
         userId: user_id,
-        subject: subject
+        subject: subject,
+        resolution: null
     });
 
     await report.save();
