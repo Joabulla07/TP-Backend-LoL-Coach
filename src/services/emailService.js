@@ -54,7 +54,7 @@ export const forgetPasswordEmailService = async(email) => {
 export const sendToMeReportService = async (userData) => {
     logger.info(userData)
     const { from_email, description_content, subject, user_id} = userData
-
+    logger.info(from_email, description_content, subject, user_id)
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.sender = {
