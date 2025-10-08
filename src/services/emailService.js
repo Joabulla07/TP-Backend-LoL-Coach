@@ -52,9 +52,11 @@ export const forgetPasswordEmailService = async(email) => {
 }
 
 export const sendToMeReportService = async (userData) => {
-    logger.info(userData)
     const { from_email, description_content, subject, user_id} = userData
-    logger.info(from_email, description_content, subject, user_id)
+    logger.info(`from email: ${from_email}`)
+    logger.info(`description content: ${description_content}`)
+    logger.info(`subject: ${subject}`)
+    logger.info(`user id: ${user_id}`)
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     sendSmtpEmail.sender = {
@@ -70,6 +72,7 @@ export const sendToMeReportService = async (userData) => {
     sendSmtpEmail.subject = `Reporte de usuario: ${subject}`;
     sendSmtpEmail.textContent = `Usuario Email: ${from_email}\n\nConsultas: ${description_content}`;
 
+    logger.info("creando reporte")
     await createReportService(from_email, description_content, subject, user_id)
 
     try {

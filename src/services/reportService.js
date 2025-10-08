@@ -9,7 +9,7 @@ export const getAllReportsService = async () => {
 }
 
 export const createReportService = async (from_email, description_content, subject, user_id) => {
-    logger.info("creando nuevo reporte")
+    logger.info("Entrando a crear nuevo reporte")
     const report = new Report({
         reportDescription: description_content,
         userEmail: from_email,
