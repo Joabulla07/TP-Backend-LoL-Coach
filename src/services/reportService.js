@@ -18,4 +18,5 @@ export const createReportService = async (from_email, description_content, subje
     });
 
     await report.save();
+    return {message: "Reporte creado exitosamente"}
 }
