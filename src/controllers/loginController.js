@@ -20,6 +20,9 @@ export const login = async (req, res) => {
         if (err.statusCode === 401){
             return res.status(401).json({ message: "Error de credenciales", err});
         }
+        if (err.statusCode === 400){
+            return res.status(400).json({ message: err.message, err});
+        }
         return res.status(500).json({ message: "Error interno del servidor", err});
     }
 
