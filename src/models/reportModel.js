@@ -1,6 +1,4 @@
 import mongoose from 'mongoose'
-import { isGoodPassword } from '../utils/validators.js'
-import bcrypt from "bcryptjs";
 
 
 const reportSchema = new mongoose.Schema({
