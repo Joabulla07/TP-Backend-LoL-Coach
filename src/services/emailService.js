@@ -89,7 +89,7 @@ export const notificationReportEmailService = async (userData, reqType) => {
 
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
-    const reporte = await Report.findById(reportId).populate('userId', 'email')
+    const reporte = await Report.findById(reportId).populate('userId', 'email name')
     logger.info(`Datos de reporte: ${reporte.userId.email}, ${reporte.userId.name}`)
 
     if(reqType === "reporte"){
