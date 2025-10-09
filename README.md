@@ -158,7 +158,8 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
     ```
 
 ### Chat
-- `POST /api/chat/chat` - Enviar un mensaje al asistente de IA (requiere cookie)
+- `POST /api/chat/chat` - Enviar un mensaje al asistente de IA (requiere cookie) Como es otro servicio y tiene que ser levantado, puede tardar
+o al comienzo puede lanzar error de "Too many requests". Solo pasa llamando al endpoint, no en la pagina.
   - Body:
     ```json
     {
@@ -172,7 +173,8 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 ### Emails
 
 agregar forget password send
-- `POST /api/email/forgetPassword` - Enviar un formulario de contacto
+- `POST /api/email/forgetPassword` - Enviar un mail con un link para restablecer la contraseña.
+Allí se ingresa al link enviado y se redirige a un ejs para el cambio de contraseña
     - Body:
       ```json
       {
@@ -180,7 +182,8 @@ agregar forget password send
       }
       ```
 
-- `POST /api/email/sendForm` - Enviar un formulario de contacto
+- `POST /api/email/sendForm` - Enviar un mail interno al correo de brevo con el form de contacto
+del landing page. También le envia un mail al usuario notificando de que se recibió su consulta.
   - Body:
     ```json
     {
@@ -189,7 +192,9 @@ agregar forget password send
       "description_content": "Contenido del mensaje"
     }
     ```
-- `POST /api/email/send-to-me` - Enviar reporte (requiere cookie)
+- `POST /api/email/send-to-me` - Enviar reporte (requiere cookie) Primero se debe crear el reporte,
+Con el Id del reporte se lo envía en el body en reportId. Con eso se envia mail interno para que llegue el reporte y
+también envia un email al usuario indicando que el reporte fue realizado.
   - Body:
     ```json
     {
@@ -197,7 +202,7 @@ agregar forget password send
     }
     ```
 ### Reportes
-  - `POST /api/report/create` - Enviar un formulario de contacto
+  - `POST /api/report/create` - Crea un reporte (requiere cookie)
       - Body:
         ```json
         {
