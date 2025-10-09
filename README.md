@@ -61,12 +61,14 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 3. Configura las variables de entorno:
    Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
    ```env
-   PORT=3000
-   NODE_ENV=development
-   MONGO_DB_CONNECTION_STRING=""
-   BREVO_API_KEY=tu_api_key_de_brevo
-   SESSION_SECRET=tu_secreto_de_sesion
-   FRONTEND_URL=""
+    MONGO_DB_CONNECTION_STRING=""
+    BREVO_API_KEY=""
+    FRONTEND_URL="" frontend url para el envio del mail
+    LOG_LEVEL="info"
+    API_URL_COACH="" # backend del chat
+    CORREO_REMITENTE="" # correo validado de brevo
+    NOMBRE_REMITENTE="LEAGUE OF COACHING"
+    NODE_ENV='dev'
    ```
 
 4. Inicia el servidor en modo desarrollo:
