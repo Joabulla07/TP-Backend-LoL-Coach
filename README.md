@@ -102,29 +102,17 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 
 ## 🌐 Endpoints de la API
 
-### Autenticación
-- `POST /api/login` - Iniciar sesión
-  - Body:
-    ```json
-    {
-      "email": "usuario@ejemplo.com",
-      "password": "contraseña"
-    }
-    ```
-- `GET /api/auth/status` - Verifica el estado de la autenticación (requiere cookie)
-- `POST /api/logout` - Cierra la sesión del usuario (requiere cookie)
-
 ### Usuarios
 - `POST /api/user/create` - Crear nuevo usuario
-  - Body:
-    ```json
-    {
-      "email": "usuario@ejemplo.com",
-      "password": "Contraseña123",
-      "name": "Nombre",
-      "lastName": "Apellido"
-    }
-    ```
+    - Body:
+      ```json
+      {
+        "email": "usuario@ejemplo.com",
+        "password": "Contraseña123",
+        "name": "Nombre",
+        "lastName": "Apellido"
+      }
+      ```
 - `GET /api/user/getUser/:id` - Traer un usuario por Id (requiere cookie)
     - Path param: `id` (ID del usuario)
 - `PUT /api/user/changePassword/:id` - Cambiar la contraseña de un usuario (requiere cookie)
@@ -137,6 +125,18 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
       ```
 - `DELETE /api/user/delete/:id` - Eliminar un usuario (requiere cookie)
     - Path param: `id` (ID del usuario)
+
+### Autenticación
+- `POST /api/login` - Iniciar sesión
+  - Body:
+    ```json
+    {
+      "email": "usuario@ejemplo.com",
+      "password": "contraseña"
+    }
+    ```
+- `GET /api/auth/status` - Verifica el estado de la autenticación (requiere cookie)
+- `POST /api/logout` - Cierra la sesión del usuario (requiere cookie)
 
 ### Restablecimiento de Contraseña con ejs y emails (Desde postman probablemente no funcione ya que renderiza ejs)
 - `POST /api/email/forgetPassword` - Solicitar restablecimiento de contraseña por email

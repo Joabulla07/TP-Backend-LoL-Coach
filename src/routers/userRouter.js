@@ -15,5 +15,5 @@ userRoute.post("/create", createUser)
 userRoute.get("/getUser/:id", verifyTokenMiddleware, getUserById)
 userRoute.post("/resetPassword/:id", resetPassword) // como es por un ejs no permite patch
 userRoute.get("/resetPasswordForm/:id", resetPasswordForm) // trae un ejs
-userRoute.put("/changePassword/:id", verifyTokenMiddleware,changePassword)
+userRoute.patch("/changePassword/:id", verifyTokenMiddleware,changePassword)
 userRoute.delete("/delete/:id", verifyTokenMiddleware, deleteUser)
