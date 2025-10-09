@@ -23,7 +23,6 @@ export const createUserService = async (userData) => {
 
 export const getUserByIdService = async(userData) => {
     const { userId } = userData
-    console.log(userId)
     const user = await User.findById(userId)
 
     if(!user){
@@ -46,7 +45,6 @@ export const resetPasswordService = async(userId, userData) => {
     }
 
     const userEmail = user.email;
-    logger.info("Encontrado: ", userEmail);
 
     user.password = userData;
     await user.save(); // Esto activará el pre-save hook para hashear la contraseña

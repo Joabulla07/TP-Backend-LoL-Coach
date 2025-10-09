@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import logger from "../core/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,7 @@ export async function loadEmailTemplate(templateName, variables = {}) {
 
         return template;
     } catch (error) {
-        console.error('Error al cargar la plantilla de correo:', error);
+        logger.error('Error al cargar la plantilla de correo:', error);
         throw error;
     }
 }

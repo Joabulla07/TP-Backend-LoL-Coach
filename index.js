@@ -12,7 +12,7 @@ import {emailRoute} from "./src/routers/emailRouter.js";
 import {chatRoute} from "./src/routers/chatRouter.js";
 import {startRouter} from "./src/routers/startServerRouter.js";
 import cookieParser from 'cookie-parser';
-import {reportRoute} from "./src/routers/reportRouter.js"; // Importamos cookie-parser
+import {reportRoute} from "./src/routers/reportRouter.js";
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -24,7 +24,6 @@ const __dirname = path.dirname(__filename);
 // Conectar a la base de datos
 connectDB();
 
-// Middleware para logging de peticiones
 app.use((req, res, next) => {
     logger.info(`[${req.method}] ${req.originalUrl}`);
     next();

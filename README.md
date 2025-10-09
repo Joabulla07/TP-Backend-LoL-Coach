@@ -84,23 +84,48 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
 
 ```
 .
-├── config/               # Configuraciones
-├── controllers/          # Controladores
-├── core/                 # Núcleo de la aplicación
-├── logs/                 # Archivos de log
-├── middleware/           # Middlewares
-├── models/              # Modelos de datos
-├── public/              # Archivos estáticos
-├── routes/              # Rutas de la API
-├── services/            # Lógica de negocio
-├── templates/           # Plantillas de email
-├── utils/               # Utilidades
-├── views/               # Vistas (EJS)
-├── .env                 # Variables de entorno (crear)
+├── src/
+│   ├── controllers/      # Controladores
+│   ├── core/             # Configuraciones
+│   ├── logs/             # Archivos de log
+│   ├── middleware/       # Middlewares
+│   ├── models/           # Modelos de datos
+│   ├── routers/          # Rutas de la API
+│   ├── services/         # Lógica de negocio
+│   ├── templates/        # Plantillas de email
+│   ├── utils/            # Utilidades
+│   └── views/            # Vistas (EJS)
+├── .env                  # Variables de entorno (crear)
 ├── .gitignore
-├── index.js             # Punto de entrada
+├── index.js              # Punto de entrada
+├── package-lock.json
 └── package.json
 ```
+
+## 💾 Modelos de Datos (MongoDB)
+
+A continuación se describen los modelos de datos utilizados en la aplicación.
+
+### Modelo de Usuario (`lol-coach-users-utn`)
+
+| Campo       | Tipo     | Requerido | Descripción                                                                                             |
+|-------------|----------|-----------|---------------------------------------------------------------------------------------------------------|
+| `name`      | String   | Sí        | Nombre del usuario (2-20 caracteres).                                                                   |
+| `lastName`  | String   | Sí        | Apellido del usuario (2-20 caracteres).                                                                 |
+| `email`     | String   | Sí        | Correo electrónico único del usuario.                                                                   |
+| `password`  | String   | Sí        | Contraseña encriptada. Debe tener 6-12 caracteres, una mayúscula, una minúscula y un número.            |
+| `lastLogin` | Date     | No        | Fecha del último inicio de sesión.                                                                      |
+| `createdAt` | Date     | Sí        | Fecha de creación del documento (automático por `timestamps`).                                          |
+| `updatedAt` | Date     | Sí        | Fecha de la última actualización del documento (automático por `timestamps`).                           |
+
+### Modelo de Reporte (`lol-coaching-reports`)
+
+| Campo               | Tipo     | Requerido | Descripción                                                                    |
+|---------------------|----------|-----------|--------------------------------------------------------------------------------|
+| `reportDescription` | String   | Sí        | Descripción detallada del reporte (10-500 caracteres).                         |
+| `userId`            | ObjectId | Sí        | ID del usuario que crea el reporte. Referencia a la colección de usuarios.     |
+| `resolution`        | String   | No        | Resolución o estado del reporte (ej. "pendiente", "resuelto").                 |
+| `subject`           | String   | Sí        | Asunto o título del reporte (2-50 caracteres).                                 |
 
 ## 🌐 Endpoints de la API
 

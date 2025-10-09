@@ -3,7 +3,6 @@ import { config } from "../core/config.js";
 import User from "../models/userModel.js";
 import {loadEmailTemplate} from "../utils/emailHelper.js";
 import Report from "../models/reportModel.js";
-import {createReportService} from "./reportService.js";
 import logger from "../core/logger.js";
 
 
@@ -15,9 +14,8 @@ const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
 
 export const forgetPasswordEmailService = async(email) => {
-    console.log(email)
     const user = await User.findOne({email});
-    console.log(user)
+
     if(!user){
         throw new Error("Usuario no encontrado");
     }
@@ -67,7 +65,7 @@ export const sendToMeReportService = async (userData) => {
     }];
 
     const reporte = await Report.findById(reportId).populate('userId', 'email')
-    logger.info(`Datos de reporte: ${reporte.userId.email}, reporte subject: ${reporte.subject}, reporte description: ${reporte.reportDescription}`)
+    // logger.info(`Datos de reporte: ${reporte.userId.email}, reporte subject: ${reporte.subject}, reporte description: ${reporte.reportDescription}`)
     sendSmtpEmail.subject = `Reporte de usuario: ${reporte.subject}`;
     sendSmtpEmail.textContent = `Usuario Email: ${reporte.userId.email}\n\nConsultas: ${reporte.reportDescription}`;
 
@@ -90,7 +88,7 @@ export const notificationReportEmailService = async (userData) => {
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
     const reporte = await Report.findById(reportId).populate('userId', 'email name')
-    logger.info(`Datos de reporte: ${reporte.userId.email}, ${reporte.userId.name}`)
+    // logger.info(`Datos de reporte: ${reporte.userId.email}, ${reporte.userId.name}`)
 
     template = await loadEmailTemplate('NOTIFICATION_REPORT', {
         user_email: reporte.userId.email });

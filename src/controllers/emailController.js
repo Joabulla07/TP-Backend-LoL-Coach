@@ -3,14 +3,12 @@ import {
     notificationReportEmailService, sendFormService,
     sendToMeReportService
 } from "../services/emailService.js";
-import logger from "../core/logger.js";
 
 
 export const sendToMeReport = async (req, res) => {
     try {
         const result = await sendToMeReportService(req.body)
         const result2 = await notificationReportEmailService(req.body)
-
 
         return  res.status(200).json({result: result, result2: result2});
     } catch (error) {
