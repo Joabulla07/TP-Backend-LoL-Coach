@@ -63,7 +63,7 @@ La información utilizada de entrenamiento del modelo de LLM fue generada por un
    ```env
     MONGO_DB_CONNECTION_STRING=""
     BREVO_API_KEY=""
-    FRONTEND_URL="" frontend url para el envio del mail
+    FRONTEND_URL="" # frontend url para el envio del mail
     LOG_LEVEL="info"
     API_URL_COACH="" # backend del chat
     CORREO_REMITENTE="" # correo validado de brevo
