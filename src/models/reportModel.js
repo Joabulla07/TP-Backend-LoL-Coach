@@ -6,7 +6,7 @@ const reportSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 500,
-        minlength: 10,
+        minlength: 2,
         trim: true,
         lowercase: true,
     },
